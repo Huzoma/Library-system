@@ -5,56 +5,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Library Management System — Group 4</title>
   <link rel="stylesheet" href="styles.css" />
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
 
 <!-- ═══════════════════════ SIDEBAR ═══════════════════════════ -->
 <aside id="sidebar">
   <div class="sidebar-logo">
-    <h1>📚 LibraryMS</h1>
+    <h1><i data-lucide="library"></i> LibraryMS</h1>
     <span>Group 4 Project</span>
   </div>
   <nav>
     <div class="nav-section">Overview</div>
     <div class="nav-item" data-page="dashboard">
-      <span class="icon">🏠</span><span class="label">Dashboard</span>
+      <span class="icon"><i data-lucide="layout-dashboard"></i></span><span class="label">Dashboard</span>
     </div>
 
     <div class="nav-section">Catalogue</div>
     <div class="nav-item" data-page="books">
-      <span class="icon">📖</span><span class="label">Book Registration</span>
+      <span class="icon"><i data-lucide="book-open"></i></span><span class="label">Book Registration</span>
     </div>
     <div class="nav-item" data-page="authors_categories">
-      <span class="icon">🏷️</span><span class="label">Authors & Categories</span>
+      <span class="icon"><i data-lucide="tags"></i></span><span class="label">Authors & Categories</span>
     </div>
     <div class="nav-item" data-page="available">
-      <span class="icon">✅</span><span class="label">Available Books</span>
+      <span class="icon"><i data-lucide="check-circle-2"></i></span><span class="label">Available Books</span>
     </div>
 
     <div class="nav-section">Members</div>
     <div class="nav-item" data-page="users">
-      <span class="icon">👤</span><span class="label">User Registration</span>
+      <span class="icon"><i data-lucide="users"></i></span><span class="label">User Registration</span>
     </div>
 
     <div class="nav-section">Circulation</div>
     <div class="nav-item" data-page="borrow">
-      <span class="icon">📤</span><span class="label">Issue Book</span>
+      <span class="icon"><i data-lucide="arrow-up-to-line"></i></span><span class="label">Issue Book</span>
     </div>
     <div class="nav-item" data-page="returns">
-      <span class="icon">📥</span><span class="label">Return Book</span>
+      <span class="icon"><i data-lucide="arrow-down-to-line"></i></span><span class="label">Return Book</span>
     </div>
     <div class="nav-item" data-page="overdue">
-      <span class="icon">⏰</span><span class="label">Overdue Books</span>
+      <span class="icon"><i data-lucide="clock"></i></span><span class="label">Overdue Books</span>
     </div>
 
     <div class="nav-section">Finance</div>
     <div class="nav-item" data-page="fines">
-      <span class="icon">💰</span><span class="label">Fines</span>
+      <span class="icon"><i data-lucide="banknote"></i></span><span class="label">Fines</span>
     </div>
 
     <div class="nav-section">Analytics</div>
     <div class="nav-item" data-page="reports">
-      <span class="icon">📊</span><span class="label">Library Reports</span>
+      <span class="icon"><i data-lucide="bar-chart-3"></i></span><span class="label">Library Reports</span>
     </div>
   </nav>
 </aside>
@@ -105,27 +107,27 @@
 
       <div class="quick-actions">
         <div class="qa-btn" data-goto="books">
-          <div class="qa-icon">📖</div><div class="qa-label">Add Book</div>
+          <div class="qa-icon"><i data-lucide="book-open"></i></div><div class="qa-label">Add Book</div>
         </div>
         <div class="qa-btn" data-goto="users">
-          <div class="qa-icon">👤</div><div class="qa-label">Register Member</div>
+          <div class="qa-icon"><i data-lucide="user-plus"></i></div><div class="qa-label">Register Member</div>
         </div>
         <div class="qa-btn" data-goto="borrow">
-          <div class="qa-icon">📤</div><div class="qa-label">Issue Book</div>
+          <div class="qa-icon"><i data-lucide="arrow-up-to-line"></i></div><div class="qa-label">Issue Book</div>
         </div>
         <div class="qa-btn" data-goto="returns">
-          <div class="qa-icon">📥</div><div class="qa-label">Return Book</div>
+          <div class="qa-icon"><i data-lucide="arrow-down-to-line"></i></div><div class="qa-label">Return Book</div>
         </div>
         <div class="qa-btn" data-goto="overdue">
-          <div class="qa-icon">⏰</div><div class="qa-label">Overdue List</div>
+          <div class="qa-icon"><i data-lucide="clock"></i></div><div class="qa-label">Overdue List</div>
         </div>
         <div class="qa-btn" data-goto="fines">
-          <div class="qa-icon">💰</div><div class="qa-label">Manage Fines</div>
+          <div class="qa-icon"><i data-lucide="banknote"></i></div><div class="qa-label">Manage Fines</div>
         </div>
       </div>
 
       <div class="card">
-        <div class="card-title">⏰ Overdue Books (Recent)</div>
+        <div class="card-title"><i data-lucide="alert-triangle" class="card-icon text-danger"></i> Overdue Books (Recent)</div>
         <div class="table-wrap">
           <table>
             <thead>
@@ -140,7 +142,7 @@
     <!-- ═══════════════ BOOK REGISTRATION ════════════════════════ -->
     <div class="page" id="page-books">
       <div class="card">
-        <div class="card-title">➕ Register New Book</div>
+        <div class="card-title"><i data-lucide="plus-circle" class="card-icon text-accent"></i> Register New Book</div>
         <form id="book-form">
           <div class="form-grid">
             <div class="form-group">
@@ -181,17 +183,17 @@
             <textarea name="description" placeholder="Short description of the book"></textarea>
           </div>
           <div class="btn-row">
-            <button type="submit" class="btn btn-primary">📖 Register Book</button>
+            <button type="submit" class="btn btn-primary"><i data-lucide="plus"></i> Register Book</button>
             <button type="reset" class="btn btn-ghost">Clear</button>
           </div>
         </form>
       </div>
 
       <div class="card">
-        <div class="card-title">🔍 Book Search</div>
+        <div class="card-title"><i data-lucide="search" class="card-icon text-accent"></i> Book Search</div>
         <div class="search-row">
           <div class="search-input-wrap">
-            <span class="search-icon">🔍</span>
+            <span class="search-icon"><i data-lucide="search"></i></span>
             <input id="book-search" type="text" placeholder="Search by title, author or ISBN…" />
           </div>
           <button id="book-search-btn" class="btn btn-primary">Search</button>
@@ -211,7 +213,7 @@
     <div class="page" id="page-authors_categories">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
         <div class="card">
-          <div class="card-title">✍️ Add Author</div>
+          <div class="card-title"><i data-lucide="pen-tool" class="card-icon text-accent"></i> Add Author</div>
           <form id="author-form">
             <div class="form-grid cols-1">
               <div class="form-group">
@@ -238,7 +240,7 @@
         </div>
 
         <div class="card">
-          <div class="card-title">🏷️ Add Category</div>
+          <div class="card-title"><i data-lucide="tag" class="card-icon text-accent"></i> Add Category</div>
           <form id="category-form">
             <div class="form-grid cols-1">
               <div class="form-group">
@@ -258,7 +260,7 @@
       </div>
 
       <div class="card">
-        <div class="card-title">📋 Authors</div>
+        <div class="card-title"><i data-lucide="users" class="card-icon text-accent"></i> Authors</div>
         <div class="table-wrap">
           <table>
             <thead><tr><th>#</th><th>Name</th><th>Nationality</th><th>Books</th><th>Bio</th></tr></thead>
@@ -268,7 +270,7 @@
       </div>
 
       <div class="card">
-        <div class="card-title">📋 Categories</div>
+        <div class="card-title"><i data-lucide="tag" class="card-icon text-accent"></i> Categories</div>
         <div class="table-wrap">
           <table>
             <thead><tr><th>#</th><th>Name</th><th>Description</th><th>Books</th></tr></thead>
@@ -281,7 +283,7 @@
     <!-- ═══════════════ USER REGISTRATION ════════════════════════ -->
     <div class="page" id="page-users">
       <div class="card">
-        <div class="card-title">👤 Register New Member</div>
+        <div class="card-title"><i data-lucide="user-plus" class="card-icon text-accent"></i> Register New Member</div>
         <form id="user-form">
           <div class="form-grid">
             <div class="form-group">
@@ -314,17 +316,17 @@
             </div>
           </div>
           <div class="btn-row">
-            <button type="submit" class="btn btn-primary">👤 Register Member</button>
+            <button type="submit" class="btn btn-primary"><i data-lucide="user-plus"></i> Register Member</button>
             <button type="reset" class="btn btn-ghost">Clear</button>
           </div>
         </form>
       </div>
 
       <div class="card">
-        <div class="card-title">👥 All Members</div>
+        <div class="card-title"><i data-lucide="users" class="card-icon text-accent"></i> All Members</div>
         <div class="search-row">
           <div class="search-input-wrap">
-            <span class="search-icon">🔍</span>
+            <span class="search-icon"><i data-lucide="search"></i></span>
             <input id="user-search" type="text" placeholder="Search by name, member ID or email…" />
           </div>
           <button id="user-search-btn" class="btn btn-primary">Search</button>
@@ -343,7 +345,7 @@
     <!-- ═══════════════ ISSUE BOOK ════════════════════════════════ -->
     <div class="page" id="page-borrow">
       <div class="card" style="max-width:600px">
-        <div class="card-title">📤 Issue Book to Member</div>
+        <div class="card-title"><i data-lucide="arrow-up-to-line" class="card-icon text-accent"></i> Issue Book to Member</div>
         <form id="issue-form">
           <div class="form-grid cols-1">
             <div class="form-group">
@@ -364,7 +366,7 @@
             </div>
           </div>
           <div class="btn-row">
-            <button type="submit" class="btn btn-primary">📤 Issue Book</button>
+            <button type="submit" class="btn btn-primary"><i data-lucide="arrow-up-to-line"></i> Issue Book</button>
           </div>
         </form>
         <div id="issue-confirm" style="margin-top:12px"></div>
@@ -374,7 +376,7 @@
     <!-- ═══════════════ RETURN BOOK ═══════════════════════════════ -->
     <div class="page" id="page-returns">
       <div class="card">
-        <div class="card-title">📥 Active Borrowings — Select to Return</div>
+        <div class="card-title"><i data-lucide="arrow-down-to-line" class="card-icon text-accent"></i> Active Borrowings — Select to Return</div>
         <div class="table-wrap">
           <table>
             <thead>
@@ -389,7 +391,7 @@
     <!-- ═══════════════ OVERDUE ════════════════════════════════════ -->
     <div class="page" id="page-overdue">
       <div class="card">
-        <div class="card-title">⏰ Overdue Book List</div>
+        <div class="card-title"><i data-lucide="clock" class="card-icon text-danger"></i> Overdue Book List</div>
         <div class="table-wrap">
           <table>
             <thead>
@@ -404,7 +406,7 @@
     <!-- ═══════════════ FINES ══════════════════════════════════════ -->
     <div class="page" id="page-fines">
       <div class="card" style="max-width:480px">
-        <div class="card-title">🧮 Fine Calculator</div>
+        <div class="card-title"><i data-lucide="calculator" class="card-icon text-warning"></i> Fine Calculator</div>
         <div class="form-grid cols-1">
           <div class="form-group">
             <label>Borrowing ID</label>
@@ -418,7 +420,7 @@
       </div>
 
       <div class="card">
-        <div class="card-title">💸 Unpaid Fines</div>
+        <div class="card-title"><i data-lucide="dollar-sign" class="card-icon text-danger"></i> Unpaid Fines</div>
         <div class="table-wrap">
           <table>
             <thead>
@@ -430,7 +432,7 @@
       </div>
 
       <div class="card">
-        <div class="card-title">📋 All Fines</div>
+        <div class="card-title"><i data-lucide="list" class="card-icon text-accent"></i> All Fines</div>
         <div class="table-wrap">
           <table>
             <thead>
@@ -445,7 +447,7 @@
     <!-- ═══════════════ AVAILABLE BOOKS ═══════════════════════════ -->
     <div class="page" id="page-available">
       <div class="card">
-        <div class="card-title">✅ Available Books (In Stock)</div>
+        <div class="card-title"><i data-lucide="check-circle" class="card-icon text-success"></i> Available Books (In Stock)</div>
         <div class="table-wrap">
           <table>
             <thead>
@@ -460,7 +462,7 @@
     <!-- ═══════════════ REPORTS ════════════════════════════════════ -->
     <div class="page" id="page-reports">
       <div class="card">
-        <div class="card-title">📊 Library Summary Report</div>
+        <div class="card-title"><i data-lucide="bar-chart-3" class="card-icon text-accent"></i> Library Summary Report</div>
         <div class="stats-grid">
           <div class="stat-card"><div class="label">Total Titles</div><div class="value" id="rpt-total-books">—</div></div>
           <div class="stat-card"><div class="label">Total Copies</div><div class="value" id="rpt-total-copies">—</div></div>
@@ -475,7 +477,7 @@
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
         <div class="card">
-          <div class="card-title">🏆 Most Borrowed Books</div>
+          <div class="card-title"><i data-lucide="award" class="card-icon text-warning"></i> Most Borrowed Books</div>
           <div class="table-wrap">
             <table>
               <thead><tr><th>Rank</th><th>Title</th><th>Author</th><th>Times Borrowed</th></tr></thead>
@@ -485,7 +487,7 @@
         </div>
 
         <div class="card">
-          <div class="card-title">📚 Books by Category</div>
+          <div class="card-title"><i data-lucide="folder" class="card-icon text-accent"></i> Books by Category</div>
           <div class="table-wrap">
             <table>
               <thead><tr><th>Category</th><th>Titles</th><th>Copies</th><th>Available</th></tr></thead>

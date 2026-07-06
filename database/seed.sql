@@ -80,9 +80,9 @@ UPDATE books SET available_copies = available_copies - 1 WHERE book_id IN (2, 3,
 
 -- ---- Fines for overdue borrowings ---------------------------
 INSERT INTO fines (borrowing_id, user_id, overdue_days, rate_per_day, total_amount, paid) VALUES
-  (9,  8, 7,  0.50, 3.50, 0),
-  (10, 9, 4,  0.50, 2.00, 0),
-  (11, 10, 11, 0.50, 5.50, 0);
+  (8,  8, 7,  0.50, 3.50, 0),
+  (9,  9, 4,  0.50, 2.00, 0),
+  (10, 10, 11, 0.50, 5.50, 0);
 
 -- One historical paid fine
 INSERT INTO fines (borrowing_id, user_id, overdue_days, rate_per_day, total_amount, paid, paid_at) VALUES

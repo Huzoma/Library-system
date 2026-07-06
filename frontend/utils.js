@@ -5,12 +5,22 @@
 
 // ── Toast Notifications ───────────────────────────────────────
 function toast(msg, type = 'success') {
-  const icons = { success: '✅', error: '❌', warning: '⚠️' };
+  const icons = { success: 'check-circle-2', error: 'x-circle', warning: 'alert-circle' };
+  const iconName = icons[type] || 'info';
   const el = document.createElement('div');
   el.className = `toast ${type}`;
-  el.innerHTML = `<span>${icons[type] || 'ℹ️'}</span><span>${msg}</span>`;
+  el.innerHTML = `<span><i data-lucide="${iconName}"></i></span><span>${msg}</span>`;
   document.getElementById('toast-container').appendChild(el);
-  setTimeout(() => { el.style.opacity = '0'; el.style.transition = 'opacity .4s'; }, 3200);
+  if (window.lucide) {
+    lucide.createIcons({
+      attrs: { class: 'toast-icon' }
+    });
+  }
+  setTimeout(() => { 
+    el.style.opacity = '0'; 
+    el.style.transform = 'translateY(10px)'; 
+    el.style.transition = 'all .4s ease'; 
+  }, 3200);
   setTimeout(() => el.remove(), 3600);
 }
 window.toast = toast;
@@ -19,11 +29,16 @@ window.toast = toast;
 function showModal(html, onClose) {
   const backdrop = document.createElement('div');
   backdrop.className = 'modal-backdrop';
-  backdrop.innerHTML = `<div class="modal">${html}</div>`;
+  backdrop.innerHTML = `
+    <div class="modal">
+      <button class="modal-close" data-close><i data-lucide="x"></i></button>
+      ${html}
+    </div>`;
   document.body.appendChild(backdrop);
+  if (window.lucide) lucide.createIcons();
   backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(backdrop, onClose); });
-  const closeBtn = backdrop.querySelector('[data-close]');
-  if (closeBtn) closeBtn.addEventListener('click', () => closeModal(backdrop, onClose));
+  const closeBtn = backdrop.querySelectorAll('[data-close]');
+  closeBtn.forEach(btn => btn.addEventListener('click', () => closeModal(backdrop, onClose)));
   return backdrop;
 }
 function closeModal(backdrop, cb) {
@@ -84,7 +99,7 @@ window.populateSelect = populateSelect;
 
 // ── Empty state ────────────────────────────────────────────────
 function emptyState(msg = 'No records found') {
-  return `<tr><td colspan="20"><div class="empty-state"><div class="icon">📭</div><p>${msg}</p></div></td></tr>`;
+  return `<tr><td colspan="20"><div class="empty-state"><div class="icon"><i data-lucide="inbox"></i></div><p>${msg}</p></div></td></tr>`;
 }
 window.emptyState = emptyState;
 

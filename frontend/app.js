@@ -5,6 +5,17 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  // ── Initialize Lucide Icons & Auto-Render on DOM Changes ────
+  if (window.lucide) {
+    lucide.createIcons();
+    const observer = new MutationObserver(() => {
+      observer.disconnect();
+      lucide.createIcons();
+      observer.observe(document.getElementById('content'), { childList: true, subtree: true });
+    });
+    observer.observe(document.getElementById('content'), { childList: true, subtree: true });
+  }
+
   // ── Navigation ──────────────────────────────────────────────
   const navItems = document.querySelectorAll('.nav-item');
   const pages    = document.querySelectorAll('.page');
@@ -240,16 +251,22 @@ document.addEventListener('DOMContentLoaded', () => {
       toast(`Book issued! Due: ${fmtDate(res.due_date)}`);
       // Show confirmation
       document.getElementById('issue-confirm').innerHTML = `
-        <div class="fine-box" style="background:rgba(76,175,136,.1);border-color:rgba(76,175,136,.3)">
-          <strong>✅ Book Issued Successfully</strong><br>
-          📚 <em>${res.book_title}</em><br>
-          👤 ${res.user_name} (${res.member_id})<br>
-          📅 Due Date: <strong>${fmtDate(res.due_date)}</strong>
+        <div class="fine-box success-box">
+          <div class="fine-title"><i data-lucide="check-circle" class="text-success"></i> Book Issued Successfully</div>
+          <div class="fine-detail">
+            <span><i data-lucide="book"></i> <em>${res.book_title}</em></span><br>
+            <span><i data-lucide="user"></i> ${res.user_name} (${res.member_id})</span><br>
+            <span><i data-lucide="calendar"></i> Due Date: <strong>${fmtDate(res.due_date)}</strong></span>
+          </div>
         </div>`;
       e.target.reset();
       borrow();
     } catch(err) {
-      document.getElementById('issue-confirm').innerHTML = `<div class="fine-box"><strong>❌ ${err.message}</strong></div>`;
+      document.getElementById('issue-confirm').innerHTML = `
+        <div class="fine-box error-box">
+          <div class="fine-title"><i data-lucide="x-circle" class="text-danger"></i> Issue Failed</div>
+          <p>${err.message}</p>
+        </div>`;
       toast(err.message, 'error');
     }
   });
@@ -286,18 +303,18 @@ document.addEventListener('DOMContentLoaded', () => {
   window.returnBookModal = function(borrowingId, bookTitle, userName, overdueDays) {
     const fine = (overdueDays * 0.5).toFixed(2);
     const html = `
-      <div class="modal-title">📥 Return Book</div>
+      <div class="modal-title"><i data-lucide="arrow-down-to-line" class="text-accent"></i> Return Book</div>
       <p style="margin-bottom:14px;color:var(--muted)">Confirm return of:</p>
-      <div style="margin-bottom:14px">
-        <strong>${bookTitle}</strong><br>
-        <span style="color:var(--muted)">Borrower: ${userName}</span>
+      <div style="margin-bottom:18px;background:rgba(255,255,255,0.03);padding:12px;border-radius:6px;border:1px solid var(--border)">
+        <strong style="color:var(--accent2);font-size:1rem">${bookTitle}</strong><br>
+        <span style="color:var(--muted);font-size:0.85rem">Borrower: ${userName}</span>
       </div>
       ${overdueDays > 0
-        ? `<div class="fine-box">⚠️ Overdue by <strong>${overdueDays} days</strong> — Fine: <strong>$${fine}</strong></div>`
-        : `<div style="color:var(--success);margin-bottom:8px">✅ Returned on time — No fine</div>`
+        ? `<div class="fine-box error-box" style="margin-bottom:14px"><i data-lucide="alert-triangle" class="text-danger"></i> Overdue by <strong>${overdueDays} days</strong> — Fine: <strong>$${fine}</strong></div>`
+        : `<div style="color:var(--success);margin-bottom:14px;display:flex;align-items:center;gap:8px;font-weight:500"><i data-lucide="check-circle" class="text-success"></i> Returned on time — No fine</div>`
       }
       <div class="btn-row" style="margin-top:16px">
-        <button class="btn btn-success" id="confirm-return-btn">Confirm Return</button>
+        <button class="btn btn-success" id="confirm-return-btn"><i data-lucide="check"></i> Confirm Return</button>
         <button class="btn btn-ghost" data-close>Cancel</button>
       </div>`;
 
@@ -377,12 +394,17 @@ document.addEventListener('DOMContentLoaded', () => {
       const res = document.getElementById('calc-result');
       const data = await api.calcFine(brId);
       res.innerHTML = `
-        <div class="fine-box ${data.overdue_days > 0 ? '' : 'success-box'}">
-          <strong>Fine Calculation Result</strong><br>
-          📅 Due Date: ${fmtDate(data.due_date)}<br>
-          ⏱ Overdue Days: <strong>${data.overdue_days}</strong><br>
-          💰 Rate: $${data.rate_per_day}/day<br>
-          💵 Total Fine: <strong style="color:var(--danger);font-size:1.2rem">$${data.estimated_fine.toFixed(2)}</strong>
+        <div class="fine-box ${data.overdue_days > 0 ? 'error-box' : 'success-box'}">
+          <div class="fine-title">
+            <i data-lucide="${data.overdue_days > 0 ? 'alert-triangle' : 'check-circle'}"></i> 
+            Fine Calculation Result
+          </div>
+          <div class="fine-detail">
+            <span><i data-lucide="calendar"></i> Due Date: <strong>${fmtDate(data.due_date)}</strong></span><br>
+            <span><i data-lucide="clock"></i> Overdue Days: <strong>${data.overdue_days}</strong></span><br>
+            <span><i data-lucide="percent"></i> Rate: <strong>$${data.rate_per_day.toFixed(2)}/day</strong></span><br>
+            <span class="fine-total"><i data-lucide="dollar-sign"></i> Total Fine: <strong>$${data.estimated_fine.toFixed(2)}</strong></span>
+          </div>
         </div>`;
     } catch(err) { toast(err.message, 'error'); }
   });
